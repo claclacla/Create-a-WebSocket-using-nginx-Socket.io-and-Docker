@@ -1,0 +1,36 @@
+version: '3'
+
+networks:
+  socket_web_server_network:
+    driver: bridge 
+
+services:
+  webapp-web-server:
+    image: nginx
+    container_name: WebappWebServer
+    volumes:
+      - "${APP_FOLDER}/docker/dev/webapp-web-server/conf.d:/etc/nginx/conf.d"
+      - "${APP_FOLDER}/docker/dev/webapp-web-server/public:/usr/share/nginx/html"
+    ports:
+      - "8080:80"
+    command: [nginx-debug, '-g', 'daemon off;']
+  socket-web-server:
+    image: nginx
+    container_name: SocketWebServer
+    networks:
+      - socket_web_server_network
+    volumes:
+      - "${APP_FOLDER}/docker/dev/socket-web-server/conf.d:/etc/nginx/conf.d"
+    ports:
+      - "8081:80"
+    command: [nginx-debug, '-g', 'daemon off;']
+  socket:
+    build: ./socket
+    image: claclacla/socket
+    container_name: Socket
+    networks:
+      - socket_web_server_network
+    volumes:
+      - "${APP_FOLDER}:/usr/src/app"
+    tty: true
+    stdin_open: true

@@ -1,0 +1,13 @@
+{
+  "name": "https-server",
+  "version": "0.0.1",
+  "description": "Https server",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
+  "dependencies": {
+    "socket.io": "2.1.1"
+  },
+  "devDependencies": {}
+}

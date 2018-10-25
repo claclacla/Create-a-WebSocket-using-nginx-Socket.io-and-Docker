@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8" />
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/socket.io.js"></script>
+  <script>
+    $(function () {
+      let socket = io("http://socket.example.com:8081");
+
+      $("#giveMeANumber").mousedown(() => {
+        socket.emit("give.me.a.number", { type: "Integer" });
+
+        socket.on('take.this.number', function (payload) {
+          console.log(payload);
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <input type="button" value="Give me a number" id="giveMeANumber" />
+</body>
+
+</html>

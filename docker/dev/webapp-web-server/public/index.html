@@ -10,7 +10,7 @@
   <script src="js/socket.io.js"></script>
   <script>
     $(function () {
-      let socket = io("http://socket.example.com:8081");
+      let socket = io("http://socket.example.com:8081", { transports: ["websocket"] });
 
       $("#giveMeANumber").mousedown(() => {
         socket.emit("give.me.a.number", { type: "Integer" });
